@@ -1557,6 +1557,7 @@
         },
         {
             "name": "doctrine/collections",
+<<<<<<< HEAD
             "version": "1.6.4",
             "source": {
                 "type": "git",
@@ -1567,6 +1568,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/collections/zipball/6b1e4b2b66f6d6e49983cebfe23a21b7ccc5b0d7",
                 "reference": "6b1e4b2b66f6d6e49983cebfe23a21b7ccc5b0d7",
+=======
+            "version": "1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/collections.git",
+                "reference": "037ccc5b1c249275f8f6bb48e35f140fd52fd577"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/037ccc5b1c249275f8f6bb48e35f140fd52fd577",
+                "reference": "037ccc5b1c249275f8f6bb48e35f140fd52fd577",
+>>>>>>> 0dd6bc7ff0a748d82d30564488eefbe23afecef7
                 "shasum": ""
             },
             "require": {
@@ -1623,7 +1636,11 @@
                 "iterators",
                 "php"
             ],
+<<<<<<< HEAD
             "time": "2019-11-13T13:07:11+00:00"
+=======
+            "time": "2019-11-04T15:26:07+00:00"
+>>>>>>> 0dd6bc7ff0a748d82d30564488eefbe23afecef7
         },
         {
             "name": "doctrine/common",
@@ -2373,6 +2390,7 @@
         },
         {
             "name": "drupal/core",
+<<<<<<< HEAD
             "version": "8.7.10",
             "source": {
                 "type": "git",
@@ -2383,6 +2401,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/drupal/core/zipball/02400f3ac4970b218dc63064895b3cbbe8576ad9",
                 "reference": "02400f3ac4970b218dc63064895b3cbbe8576ad9",
+=======
+            "version": "8.7.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drupal/core.git",
+                "reference": "881e60062ea86a8f6809a298f09f56afd20b3cf3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drupal/core/zipball/881e60062ea86a8f6809a298f09f56afd20b3cf3",
+                "reference": "881e60062ea86a8f6809a298f09f56afd20b3cf3",
+>>>>>>> 0dd6bc7ff0a748d82d30564488eefbe23afecef7
                 "shasum": ""
             },
             "require": {
@@ -2614,7 +2644,11 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
+<<<<<<< HEAD
             "time": "2019-11-13T23:20:55+00:00"
+=======
+            "time": "2019-11-06T18:00:38+00:00"
+>>>>>>> 0dd6bc7ff0a748d82d30564488eefbe23afecef7
         },
         {
             "name": "drush/drush",
@@ -8560,6 +8594,7 @@
         },
         {
             "name": "webflo/drupal-core-require-dev",
+<<<<<<< HEAD
             "version": "8.7.10",
             "source": {
                 "type": "git",
@@ -8570,6 +8605,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/webflo/drupal-core-require-dev/zipball/8bdafc28da6866612a3d2274200cd74812cba3b1",
                 "reference": "8bdafc28da6866612a3d2274200cd74812cba3b1",
+=======
+            "version": "8.7.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webflo/drupal-core-require-dev.git",
+                "reference": "712de55c6f8220cd1cabb6cf88df1e40595b187e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webflo/drupal-core-require-dev/zipball/712de55c6f8220cd1cabb6cf88df1e40595b187e",
+                "reference": "712de55c6f8220cd1cabb6cf88df1e40595b187e",
+>>>>>>> 0dd6bc7ff0a748d82d30564488eefbe23afecef7
                 "shasum": ""
             },
             "require": {
@@ -8577,7 +8624,11 @@
                 "behat/mink-goutte-driver": "^1.2",
                 "behat/mink-selenium2-driver": "1.3.x-dev",
                 "drupal/coder": "^8.3.1",
+<<<<<<< HEAD
                 "drupal/core": "8.7.10",
+=======
+                "drupal/core": "8.7.9",
+>>>>>>> 0dd6bc7ff0a748d82d30564488eefbe23afecef7
                 "jcalderonzumba/gastonjs": "^1.0.2",
                 "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
                 "justinrainbow/json-schema": "^5.2",
@@ -8594,7 +8645,11 @@
                 "GPL-2.0-or-later"
             ],
             "description": "require-dev dependencies from drupal/core",
+<<<<<<< HEAD
             "time": "2019-11-13T23:31:44+00:00"
+=======
+            "time": "2019-11-06T18:31:43+00:00"
+>>>>>>> 0dd6bc7ff0a748d82d30564488eefbe23afecef7
         }
     ],
     "aliases": [],

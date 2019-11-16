@@ -1,5 +1,5 @@
 language: php
-dist: trusty
+dist: BionicBeaver
 sudo: false
 
 php:
@@ -11,7 +11,7 @@ php:
 env:
   global:
     - SIMPLETEST_DB=sqlite://tmp/site.sqlite
-    - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
+    - SIMPLETEST_BASE_URL="http://127.0.0.1:8000"
   matrix:
     - RELEASE=stable COMPOSER_CHANNEL=stable
     - RELEASE=dev COMPOSER_CHANNEL=stable

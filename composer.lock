@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "663de6eae5d94a1b5a65d1e7ff5f1f6e",
+    "content-hash": "4247b90f00dc0d9dd7fda7bcc021d548",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2615,6 +2615,44 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "time": "2019-11-13T23:20:55+00:00"
+        },
+        {
+            "name": "drupal/core-vendor-hardening",
+            "version": "8.8.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drupal/core-vendor-hardening.git",
+                "reference": "f08bdad7de04c369b7cf18e642f6d344f4b2dc07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drupal/core-vendor-hardening/zipball/f08bdad7de04c369b7cf18e642f6d344f4b2dc07",
+                "reference": "f08bdad7de04c369b7cf18e642f6d344f4b2dc07",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1",
+                "php": ">=7.0.8"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Drupal\\Composer\\Plugin\\VendorHardening\\VendorHardeningPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\Composer\\Plugin\\VendorHardening\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Hardens the vendor directory for when it's in the docroot.",
+            "homepage": "https://www.drupal.org/project/drupal",
+            "keywords": [
+                "drupal"
+            ],
+            "time": "2019-11-04T10:55:17+00:00"
         },
         {
             "name": "drush/drush",
@@ -8599,7 +8637,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "drupal/core-vendor-hardening": 10
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

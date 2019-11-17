@@ -1,9 +1,8 @@
 language: php
-dist: trusty
+dist: bionic
 
 php:
   - 7.2
-  - 7.3
 
 env:
   global:

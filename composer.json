@@ -60,17 +60,18 @@
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
         ]
     },
+
     "extra": {
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
-        },
-"extra": {
-  "drupal-core-project-message": {
+},
+"drupal-core-project-message": {
     "post-create-project-cmd-message": [
       "Thanks for installing this project.",
-      "Please visit our documentation here: https://www.drupal.org/docs/8"
-    ],
+      "Please visit our documentation here: http://drupal.org/docs8"
+        ]
+},
         "installer-paths": {
             "web/core": ["type:drupal-core"],
             "web/libraries/{$name}": ["type:drupal-library"],

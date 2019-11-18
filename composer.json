@@ -96,6 +96,7 @@
       "file-mapping": {
         "[web-root]/.htaccess": false,
         "[web-root]/robots.txt": "assets/robots-default.txt"
-      }
+      },
+   "enable-patching": true
     }}
 }

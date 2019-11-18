@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9592cd9f53e407da21dba6a5e7c2b54e",
+    "content-hash": "59138113dd52b5336385c02945a47c21",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2358,6 +2358,50 @@
             "time": "2018-06-14T14:45:07+00:00"
         },
         {
+            "name": "drupal-composer/drupal-scaffold",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drupal-composer/drupal-scaffold.git",
+                "reference": "13c1ffc7dd4925cb03707759128b85c0cd6276f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drupal-composer/drupal-scaffold/zipball/13c1ffc7dd4925cb03707759128b85c0cd6276f8",
+                "reference": "13c1ffc7dd4925cb03707759128b85c0cd6276f8",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0.0",
+                "composer/semver": "^1.4",
+                "php": "^5.5.9|>=7.0.8"
+            },
+            "require-dev": {
+                "composer/composer": "dev-master",
+                "g1a/composer-test-scenarios": "^2.1.0",
+                "phpunit/phpunit": "^6",
+                "squizlabs/php_codesniffer": "^2.8"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "DrupalComposer\\DrupalScaffold\\Plugin",
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DrupalComposer\\DrupalScaffold\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Composer Plugin for updating the Drupal scaffold files when using drupal/core",
+            "time": "2019-03-30T10:41:38+00:00"
+        },
+        {
             "name": "drupal/coder",
             "version": "8.3.6",
             "source": {
@@ -2895,53 +2939,6 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "time": "2019-11-13T23:20:55+00:00"
-        },
-        {
-            "name": "drupal/core-composer-scaffold",
-            "version": "8.8.0-beta1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/drupal/core-composer-scaffold.git",
-                "reference": "dca4b123a638d78bf77719632993e920de6cc426"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-composer-scaffold/zipball/dca4b123a638d78bf77719632993e920de6cc426",
-                "reference": "dca4b123a638d78bf77719632993e920de6cc426",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0.0",
-                "php": ">=7.0.8"
-            },
-            "conflict": {
-                "drupal-composer/drupal-scaffold": "*"
-            },
-            "require-dev": {
-                "composer/composer": "^1.8@stable"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Drupal\\Composer\\Plugin\\Scaffold\\Plugin",
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Drupal\\Composer\\Plugin\\Scaffold\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "A flexible Composer project scaffold builder.",
-            "homepage": "https://www.drupal.org/project/drupal",
-            "keywords": [
-                "drupal"
-            ],
-            "time": "2019-10-09T02:55:24+00:00"
         },
         {
             "name": "drupal/core-project-message",
@@ -8678,7 +8675,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/core-composer-scaffold": 10,
+        "drupal-composer/drupal-scaffold": 20,
         "drupal/core-project-message": 10,
         "drupal/core-vendor-hardening": 10
     },

@@ -3,7 +3,7 @@
 
 namespace Drupal\Tests\Component\EventDispatcher;
 
-use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcherTest;
+use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\Tests\TestEventListener;
  *
  * @group EventDispatcher
  */
-class ContainerAwareEventDispatcherTest extends SymfonyContainerAwareEventDispatcherTest
+class SymfonyContainerAwareEventDispatcherTest
 {
     protected function createEventDispatcher()
     {

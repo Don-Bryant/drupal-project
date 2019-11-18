@@ -3,7 +3,7 @@
 
 namespace Drupal\Tests\Component\EventDispatcher;
 
-use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
+use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcherTest;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;

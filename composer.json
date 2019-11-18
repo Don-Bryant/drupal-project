@@ -84,19 +84,17 @@
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
         },
         "drupal-scaffold": {
-           "source": "https://git.drupalcode.org/project/drupal/raw/{version}/{path}",
-      "excludes": [
-        "google123.html",
-        "robots.txt"
+         "allowed-packages": [
+        "drupal/core"
       ],
-      "includes": [
-        "sites/default/example.settings.my.php"
-      ],
-      "initial": {
-        "sites/default/default.services.yml": "sites/default/services.yml",
-        "sites/default/default.settings.php": "sites/default/settings.php"
+      "locations": {
+        "web-root": "./docroot"
       },
-      "omit-defaults": false
-        }
-    }
+      "symlink": true,
+      "overwrite": true,
+      "file-mapping": {
+        "[web-root]/.htaccess": false,
+        "[web-root]/robots.txt": "assets/robots-default.txt"
+      }
+    }}
 }

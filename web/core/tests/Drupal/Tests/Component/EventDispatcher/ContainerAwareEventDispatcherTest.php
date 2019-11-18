@@ -248,4 +248,3 @@ class SubscriberService implements EventSubscriberInterface
     }
 }
 
-

@@ -1,185 +1,249 @@
-
 <?php
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-namespace Symfony\Component\EventDispatcher\Tests;
+
+// @codingStandardsIgnoreFile
+namespace Drupal\Tests\Component\EventDispatcher;
+
+use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\Scope;
-use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
-{
-    protected function createEventDispatcher()
-    {
-        $container = new Container();
-        return new ContainerAwareEventDispatcher($container);
-    }
-    public function testAddAListenerService()
-    {
-        $event = new Event();
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $service
-            ->expects($this->once())
-            ->method('onEvent')
-            ->with($event)
-        ;
-        $container = new Container();
-        $container->set('service.listener', $service);
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'));
-        $dispatcher->dispatch('onEvent', $event);
-    }
-    public function testAddASubscriberService()
-    {
-        $event = new Event();
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\SubscriberService');
-        $service
-            ->expects($this->once())
-            ->method('onEvent')
-            ->with($event)
-        ;
-        $container = new Container();
-        $container->set('service.subscriber', $service);
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addSubscriberService('service.subscriber', 'Symfony\Component\EventDispatcher\Tests\SubscriberService');
-        $dispatcher->dispatch('onEvent', $event);
-    }
-    public function testPreventDuplicateListenerService()
-    {
-        $event = new Event();
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $service
-            ->expects($this->once())
-            ->method('onEvent')
-            ->with($event)
-        ;
-        $container = new Container();
-        $container->set('service.listener', $service);
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'), 5);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'), 10);
-        $dispatcher->dispatch('onEvent', $event);
-    }
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testTriggerAListenerServiceOutOfScope()
-    {
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $scope = new Scope('scope');
-        $container = new Container();
-        $container->addScope($scope);
-        $container->enterScope('scope');
-        $container->set('service.listener', $service, 'scope');
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'));
-        $container->leaveScope('scope');
-        $dispatcher->dispatch('onEvent');
-    }
-    public function testReEnteringAScope()
-    {
-        $event = new Event();
-        $service1 = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $service1
-            ->expects($this->exactly(2))
-            ->method('onEvent')
-            ->with($event)
-        ;
-        $scope = new Scope('scope');
-        $container = new Container();
-        $container->addScope($scope);
-        $container->enterScope('scope');
-        $container->set('service.listener', $service1, 'scope');
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'));
-        $dispatcher->dispatch('onEvent', $event);
-        $service2 = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $service2
-            ->expects($this->once())
-            ->method('onEvent')
-            ->with($event)
-        ;
-        $container->enterScope('scope');
-        $container->set('service.listener', $service2, 'scope');
-        $dispatcher->dispatch('onEvent', $event);
-        $container->leaveScope('scope');
-        $dispatcher->dispatch('onEvent');
-    }
-    public function testHasListenersOnLazyLoad()
-    {
-        $event = new Event();
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $container = new Container();
-        $container->set('service.listener', $service);
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'));
-        $event->setDispatcher($dispatcher);
-        $event->setName('onEvent');
-        $service
-            ->expects($this->once())
-            ->method('onEvent')
-            ->with($event)
-        ;
-        $this->assertTrue($dispatcher->hasListeners());
-        if ($dispatcher->hasListeners('onEvent')) {
-            $dispatcher->dispatch('onEvent');
-        }
-    }
-    public function testGetListenersOnLazyLoad()
-    {
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $container = new Container();
-        $container->set('service.listener', $service);
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'));
-        $listeners = $dispatcher->getListeners();
-        $this->assertTrue(isset($listeners['onEvent']));
-        $this->assertCount(1, $dispatcher->getListeners('onEvent'));
-    }
-    public function testRemoveAfterDispatch()
-    {
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $container = new Container();
-        $container->set('service.listener', $service);
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'));
-        $dispatcher->dispatch('onEvent', new Event());
-        $dispatcher->removeListener('onEvent', array($container->get('service.listener'), 'onEvent'));
-        $this->assertFalse($dispatcher->hasListeners('onEvent'));
-    }
-    public function testRemoveBeforeDispatch()
-    {
-        $service = $this->getMock('Symfony\Component\EventDispatcher\Tests\Service');
-        $container = new Container();
-        $container->set('service.listener', $service);
-        $dispatcher = new ContainerAwareEventDispatcher($container);
-        $dispatcher->addListenerService('onEvent', array('service.listener', 'onEvent'));
-        $dispatcher->removeListener('onEvent', array($container->get('service.listener'), 'onEvent'));
-        $this->assertFalse($dispatcher->hasListeners('onEvent'));
-    }
-}
-class Service
-{
-    public function onEvent(Event $e)
-    {
-    }
-}
-class SubscriberService implements EventSubscriberInterface
-{
-    public static function getSubscribedEvents()
-    {
-        return array(
-            'onEvent' => array('onEvent'),
-        );
-    }
-    public function onEvent(Event $e)
-    {
-    }
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\EventDispatcher\Tests\CallableClass;
+use Symfony\Component\EventDispatcher\Tests\TestEventListener;
+use Symfony\Component\EventDispatcher\Tests\ContainerAwareEventDispatcherTest as SymfonyContainerAwareEventDispatcherTest;
+
+/**
+ * Unit tests for the ContainerAwareEventDispatcher.
+ *
+ * NOTE: 98% of this code is a literal copy of Symfony's emerging
+ * CompiledEventDispatcherTest.
+ *
+ * This file does NOT follow Drupal coding standards, so as to simplify future
+ * synchronizations.
+ *
+ * @see https://github.com/symfony/symfony/pull/12521
+ *
+ * @group EventDispatcher
+ */
+class ContainerAwareEventDispatcherTest extends SymfonyContainerAwareEventDispatcherTest {
+  protected function createEventDispatcher() {
+    $container = new Container();
+    return new ContainerAwareEventDispatcher($container);
+  }
+  public function testGetListenersWithCallables() {
+
+    // When passing in callables exclusively as listeners into the event
+    // dispatcher constructor, the event dispatcher must not attempt to
+    // resolve any services.
+    $container = $this
+      ->getMock('Symfony\\Component\\DependencyInjection\\IntrospectableContainerInterface');
+    $container
+      ->expects($this
+      ->never())
+      ->method($this
+      ->anything());
+    $firstListener = new CallableClass();
+    $secondListener = function () {
+    };
+    $thirdListener = array(
+      new TestEventListener(),
+      'preFoo',
+    );
+    $listeners = array(
+      'test_event' => array(
+        0 => array(
+          array(
+            'callable' => $firstListener,
+          ),
+          array(
+            'callable' => $secondListener,
+          ),
+          array(
+            'callable' => $thirdListener,
+          ),
+        ),
+      ),
+    );
+    $dispatcher = new ContainerAwareEventDispatcher($container, $listeners);
+    $actualListeners = $dispatcher
+      ->getListeners();
+    $expectedListeners = array(
+      'test_event' => array(
+        $firstListener,
+        $secondListener,
+        $thirdListener,
+      ),
+    );
+    $this
+      ->assertSame($expectedListeners, $actualListeners);
+  }
+  public function testDispatchWithCallables() {
+
+    // When passing in callables exclusively as listeners into the event
+    // dispatcher constructor, the event dispatcher must not attempt to
+    // resolve any services.
+    $container = $this
+      ->getMock('Symfony\\Component\\DependencyInjection\\IntrospectableContainerInterface');
+    $container
+      ->expects($this
+      ->never())
+      ->method($this
+      ->anything());
+    $firstListener = new CallableClass();
+    $secondListener = function () {
+    };
+    $thirdListener = array(
+      new TestEventListener(),
+      'preFoo',
+    );
+    $listeners = array(
+      'test_event' => array(
+        0 => array(
+          array(
+            'callable' => $firstListener,
+          ),
+          array(
+            'callable' => $secondListener,
+          ),
+          array(
+            'callable' => $thirdListener,
+          ),
+        ),
+      ),
+    );
+    $dispatcher = new ContainerAwareEventDispatcher($container, $listeners);
+    $dispatcher
+      ->dispatch('test_event');
+    $this
+      ->assertTrue($thirdListener[0]->preFooInvoked);
+  }
+  public function testGetListenersWithServices() {
+    $container = new ContainerBuilder();
+    $container
+      ->register('listener_service', 'Symfony\\Component\\EventDispatcher\\Tests\\TestEventListener');
+    $listeners = array(
+      'test_event' => array(
+        0 => array(
+          array(
+            'service' => array(
+              'listener_service',
+              'preFoo',
+            ),
+          ),
+        ),
+      ),
+    );
+    $dispatcher = new ContainerAwareEventDispatcher($container, $listeners);
+    $actualListeners = $dispatcher
+      ->getListeners();
+    $listenerService = $container
+      ->get('listener_service');
+    $expectedListeners = array(
+      'test_event' => array(
+        array(
+          $listenerService,
+          'preFoo',
+        ),
+      ),
+    );
+    $this
+      ->assertSame($expectedListeners, $actualListeners);
+  }
+  public function testDispatchWithServices() {
+    $container = new ContainerBuilder();
+    $container
+      ->register('listener_service', 'Symfony\\Component\\EventDispatcher\\Tests\\TestEventListener');
+    $listeners = array(
+      'test_event' => array(
+        0 => array(
+          array(
+            'service' => array(
+              'listener_service',
+              'preFoo',
+            ),
+          ),
+        ),
+      ),
+    );
+    $dispatcher = new ContainerAwareEventDispatcher($container, $listeners);
+    $dispatcher
+      ->dispatch('test_event');
+    $listenerService = $container
+      ->get('listener_service');
+    $this
+      ->assertTrue($listenerService->preFooInvoked);
+  }
+  public function testRemoveService() {
+    $container = new ContainerBuilder();
+    $container
+      ->register('listener_service', 'Symfony\\Component\\EventDispatcher\\Tests\\TestEventListener');
+    $container
+      ->register('other_listener_service', 'Symfony\\Component\\EventDispatcher\\Tests\\TestEventListener');
+    $listeners = array(
+      'test_event' => array(
+        0 => array(
+          array(
+            'service' => array(
+              'listener_service',
+              'preFoo',
+            ),
+          ),
+          array(
+            'service' => array(
+              'other_listener_service',
+              'preFoo',
+            ),
+          ),
+        ),
+      ),
+    );
+    $dispatcher = new ContainerAwareEventDispatcher($container, $listeners);
+    $listenerService = $container
+      ->get('listener_service');
+    $dispatcher
+      ->removeListener('test_event', array(
+      $listenerService,
+      'preFoo',
+    ));
+
+    // Ensure that other service was not initialized during removal of the
+    // listener service.
+    $this
+      ->assertFalse($container
+      ->initialized('other_listener_service'));
+    $dispatcher
+      ->dispatch('test_event');
+    $this
+      ->assertFalse($listenerService->preFooInvoked);
+    $otherService = $container
+      ->get('other_listener_service');
+    $this
+      ->assertTrue($otherService->preFooInvoked);
+  }
+  public function testGetListenerPriorityWithServices() {
+    $container = new ContainerBuilder();
+    $container
+      ->register('listener_service', TestEventListener::class);
+    $listeners = array(
+      'test_event' => array(
+        5 => array(
+          array(
+            'service' => array(
+              'listener_service',
+              'preFoo',
+            ),
+          ),
+        ),
+      ),
+    );
+    $dispatcher = new ContainerAwareEventDispatcher($container, $listeners);
+    $listenerService = $container
+      ->get('listener_service');
+    $actualPriority = $dispatcher
+      ->getListenerPriority('test_event', [
+      $listenerService,
+      'preFoo',
+    ]);
+    $this
+      ->assertSame(5, $actualPriority);
+  }
+
 }

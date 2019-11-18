@@ -23,6 +23,7 @@
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.7.0",
         "drupal/core-project-message": "^8.8@beta",
+        "drupal/core-vendor-hardening": "^8.8@beta",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-core-require-dev": "^8.7",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5d538daecfd955ee785896ef6c706f5",
+    "content-hash": "893c3c1dbae664cb8a8b4baedce642a1",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2977,6 +2977,44 @@
                 "drupal"
             ],
             "time": "2019-11-04T11:12:32+00:00"
+        },
+        {
+            "name": "drupal/core-vendor-hardening",
+            "version": "8.8.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drupal/core-vendor-hardening.git",
+                "reference": "f08bdad7de04c369b7cf18e642f6d344f4b2dc07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drupal/core-vendor-hardening/zipball/f08bdad7de04c369b7cf18e642f6d344f4b2dc07",
+                "reference": "f08bdad7de04c369b7cf18e642f6d344f4b2dc07",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1",
+                "php": ">=7.0.8"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Drupal\\Composer\\Plugin\\VendorHardening\\VendorHardeningPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\Composer\\Plugin\\VendorHardening\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Hardens the vendor directory for when it's in the docroot.",
+            "homepage": "https://www.drupal.org/project/drupal",
+            "keywords": [
+                "drupal"
+            ],
+            "time": "2019-11-04T10:55:17+00:00"
         },
         {
             "name": "drush/drush",
@@ -8637,7 +8675,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/core-project-message": 10
+        "drupal/core-project-message": 10,
+        "drupal/core-vendor-hardening": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,

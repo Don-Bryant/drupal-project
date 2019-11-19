@@ -26,7 +26,6 @@
         "drupal/core-vendor-hardening": "^8.8@beta",
         "drush/drush": "10",
         "symfony/class-loader": "^3.4",
-        "symfony/event-dispatcher": "3.4.x-dev",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-core-require-dev": "^8.7",
         "webflo/drupal-finder": "^1.0.0",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "301224f5ef90099932f6bb4d5ed66bfd",
+    "content-hash": "864966e38cb556ea73de44def1ab9428",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -6688,7 +6688,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "3.4.x-dev",
+            "version": "v3.4.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -8658,8 +8658,7 @@
     "stability-flags": {
         "drupal-composer/drupal-scaffold": 20,
         "drupal/core-project-message": 10,
-        "drupal/core-vendor-hardening": 10,
-        "symfony/event-dispatcher": 20
+        "drupal/core-vendor-hardening": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,

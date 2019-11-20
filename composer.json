@@ -5,8 +5,8 @@
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "",
-            "role": ""
+            "name": "Don-Bryant",
+            "role": "Devoloper"
         }
     ],
     "repositories": [
@@ -71,7 +71,7 @@
 "drupal-core-project-message": {
     "post-create-project-cmd-message": [
       "Thanks for installing this project.",
-      "Please visit our documentation here: http://drupal.org/docs8"
+      "Please visit our documentation here: http://drupal.org/docs/8"
         ]
 },
 
